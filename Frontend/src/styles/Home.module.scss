@@ -1,0 +1,16 @@
+@import './-variables.scss';
+@import './-mixins.scss';
+
+.home {
+    @include fontStyle(48px,500);
+    @include flexContainer(column, space-between, center);
+    margin-top: 150px;
+    &__logoImg {
+        @include dimension(90px, 90px);
+    }
+    &__nav {
+        @include flexContainer(column, space-between, center);
+        gap: 50px;
+        margin-top: 50px;
+    }
+}

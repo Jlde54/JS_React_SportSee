@@ -1,0 +1,33 @@
+@import './-variables.scss';
+@import './-mixins.scss';
+
+.header {
+    @include flexContainer(row, space-between, center);
+    height: 61px;
+    padding: 20px;
+    background-color: $black-color;
+    &__logo {
+        width: 12%;
+        @include flexContainer(row, flex-start, center);
+        gap: 10px;
+    }
+    &__logoImg {
+        @include dimension(57px, 57px);
+    }
+    &__logoName {
+        @include dimension(109px, 24px);
+    }
+    &__nav {
+        width : 69%;
+    }
+    &__ul {
+        @include flexContainer(row, space-around, center);
+        list-style: none;
+        padding: 0px;
+    }
+    &__li a {
+        @include fontStyle(24px,500);
+        text-decoration: none;
+        color: $white-color;
+    }
+}
