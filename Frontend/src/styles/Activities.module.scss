@@ -2,5 +2,12 @@
 @import './-mixins.scss';
 
 .activities {
-
+    width: 75%;
+    height: 320px;
+    background-color: $bg-color;
+    border-radius: 5px;
+    padding: 30px;
+    &__title {
+        @include fontStyle(15px, 500);
+    }
 }

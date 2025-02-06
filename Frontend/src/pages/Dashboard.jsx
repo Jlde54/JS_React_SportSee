@@ -42,8 +42,6 @@ function Dashboard () {
     if (error) return <div>Error : {error}</div>;
     if (!data) return <div>No data available</div>;
 
-    console.log("Activity : ", activity)
-
     return (
         <>
             <Header />

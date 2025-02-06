@@ -40,7 +40,6 @@ export async function fetchData(apiUrl, localUrl, userId, key = null) {
             const mockedData = await localResponse.json();
 
             const user = mockedData.users.find(user => Number(user.id) === Number(userId));
-            console.log("user fetchUserData :", user)
 
             if (!user) throw new Error("Utilisateur non trouvé dans les données locales.");
             return key ? user[key] : user;

@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 
 function Activities(activities) {
 
-  console.log("Activities : ", activities)
-
   const datas = activities.data.map((activity, index) => ({
     day: index + 1,
     kilogram: activity.kilogram,
@@ -14,8 +12,11 @@ function Activities(activities) {
 
   return (
     <div className={styles.activities}>
-      <ResponsiveContainer width={835} height={320}>
+      <h3 className={styles.activities__title}>Activité quotidienne</h3>
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart
+          width={702} 
+          height={145}
           data={datas}
           margin={{
             top: 30,
@@ -23,26 +24,34 @@ function Activities(activities) {
             left: 0,
             bottom: 30,
           }}
-          barCategoryGap={26}
+          barCategoryGap="0%"
           barGap={5}
         >
           <CartesianGrid 
             strokeDasharray="2 2"
-            vertical="false" 
+            vertical={false}
           />
           <XAxis 
             dataKey="day"
+            tickLine={false}
+            tickMargin={15}
+            // scale="band"
+            padding={{ left: 0, right: 0 }}
           />
           <YAxis
             orientation="right" 
+            tickCount={3}
+            axisLine={false}
+            tickLine={false}
+            tickMargin={15}
           />
           <Tooltip />
           <Legend 
             align="right" 
             verticalAlign="top"
             iconType="circle"
-            iconSize={10}
-            wrapperStyle={{ top: 30, right: 5 }}
+            iconSize={8}
+            wrapperStyle={{ top: -30, right: 10 }}
           />
           <Bar
             layout="vertical"
