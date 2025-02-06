@@ -12,3 +12,6 @@ npm install
 npm install react-router-dom
 npm install -D sass
 npm run dev
+npm install recharts
+yarn : install the Backend dependencies
+yarn dev : to run the micro API

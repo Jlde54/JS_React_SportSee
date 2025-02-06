@@ -3,7 +3,6 @@
 
 .dashboard {
     @include flexContainer(row, start, normal);
-    border: solid red 1px;
     &__loading {
             font-size: 28px;
             font-weight: bold;
@@ -13,13 +12,12 @@
             animation: fadeIn 1s ease-in-out infinite alternate;
     }
     &__content {
-        @include flexContainer(column, space-between, start);
+        @include flexContainer(column, start, start);
         padding: 50px 100px;
         width: 100%;
         gap: 20px;
     }
     &__intro {
-        border: solid black 1px;
         width: 100%;
     }
     &__hello {
