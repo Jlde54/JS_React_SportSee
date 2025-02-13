@@ -8,18 +8,18 @@ function SideBar() {
 
     return (
         <aside className={styles.SideBar}>
-            <div className={styles.SideBar__activities}>
+            <div className={styles.SideBar__avgSessions}>
                 <a href="#">
-                    <img className={styles.SideBar__activities_img} src={yoga} alt="Logo Yoga" />
+                    <img className={styles.SideBar__avgSessions_img} src={yoga} alt="Logo Yoga" />
                 </a>
                 <a href="#">
-                    <img className={styles.SideBar__activities_img} src={swimming} alt="Logo swimming" />
+                    <img className={styles.SideBar__avgSessions_img} src={swimming} alt="Logo swimming" />
                 </a>
                 <a href="#">
-                    <img className={styles.SideBar__activities_img} src={cycling} alt="Logo cycling" />
+                    <img className={styles.SideBar__avgSessions_img} src={cycling} alt="Logo cycling" />
                 </a>
                 <a href="#">
-                    <img className={styles.SideBar__activities_img} src={weight} alt="Logo weight" />
+                    <img className={styles.SideBar__avgSessions_img} src={weight} alt="Logo weight" />
                 </a>
             </div>
             <p className={styles.SideBar__copyright}>

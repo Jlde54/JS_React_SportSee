@@ -8,7 +8,7 @@
             font-weight: bold;
             text-align: center;
             margin-top: 100px;
-            color: #ff5733;
+            color: $red-color;
             animation: fadeIn 1s ease-in-out infinite alternate;
     }
     &__content {
@@ -22,6 +22,9 @@
     }
     &__hello {
         @include fontStyle(48px,500);
+    }
+    &__firstName {
+        color: $red-color;
     }
     &__text {
         @include fontStyle(18px,400);

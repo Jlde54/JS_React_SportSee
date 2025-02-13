@@ -41,11 +41,11 @@ export async function fetchUserData(userId) {
     }
 }
 
-export async function fetchUserActivities(userId) {
+export async function fetchUseravgSessions(userId) {
     const apiUrl = `http://localhost:3000/user/${userId}/activity`;
     const localUrl = "../../mockedData/data.json";
 
-    console.log("userId fetchUserActivities :", userId)
+    console.log("userId fetchUseravgSessions :", userId)
 
     try {
         const response = await fetch(apiUrl);
@@ -68,11 +68,11 @@ export async function fetchUserActivities(userId) {
             }
             const mockedData = await localResponse.json();
             const user = mockedData.users.find(user => Number(user.id) === Number(userId));
-            console.log("user fetchUserActivities :", user)
+            console.log("user fetchUseravgSessions :", user)
 
             if (!user) throw new Error("Utilisateur non trouvé dans les données locales.");
             return {
-                activities: user.activity
+                avgSessions: user.activity
             };
 
         } catch (jsonError) {

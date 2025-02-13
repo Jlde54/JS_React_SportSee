@@ -1,0 +1,23 @@
+@import './-variables.scss';
+@import './-mixins.scss';
+
+.avgSessions {
+    width: 75%;
+    height: 320px;
+    background-color: $bg-color;
+    border-radius: 5px;
+    padding: 30px;
+    &__title {
+        @include fontStyle(15px, 500);
+        color: #20253A;
+    }
+    &__tooltip {
+        background-color: $red-color;
+        color: $white-color;
+        padding: 5px;
+        @include fontStyle(7px, 500);
+    }
+    &__tooltip_p {
+        margin-top: 20px;
+    }
+}

@@ -5,7 +5,7 @@ export async function fetchUserData(userId) {
     return fetchData(`${apiUrl}/${userId}`, localUrl, userId);
 }
 
-export async function fetchActivities(userId) {
+export async function fetchavgSessions(userId) {
     return fetchData(`${apiUrl}/${userId}`, localUrl, userId, "activity");
 }
 

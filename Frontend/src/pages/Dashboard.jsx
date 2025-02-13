@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
-import { fetchUserData, fetchActivities, fetchAvgSessions, fetchPerformance } from '../utils/api.jsx';
+import { fetchUserData, fetchavgSessions, fetchAvgSessions, fetchPerformance } from '../utils/api.jsx';
 import styles from '../styles/Dashboard.module.scss'
 import Header from '../components/Header.jsx'
-import Activities from '../components/Activities.jsx'
+import ActivityChart from '../components/ActivityChart.jsx'
+import AvgSessionsChart from '../components/AvgSessionsChart.jsx'
 import SideBar from '../components/SideBar.jsx'
 
 function Dashboard () {
     const [data, setData] = useState(null);
     const [activity, setActivity] = useState([]);
-    // const [avgSessions, setAvgSessions] = useState([]);
+    const [avgSessions, setAvgSessions] = useState([]);
     // const [performance, setPerformance] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -21,12 +22,12 @@ function Dashboard () {
             try {
                 setLoading(true);
                 const userData = await fetchUserData(userId);
-                const userActivity = await fetchActivities(userId);
-                // const userAvgSessions = await fetchAvgSessions(userId);
+                const userActivity = await fetchavgSessions(userId);
+                const userAvgSessions = await fetchAvgSessions(userId);
                 // const userPerformance = await fetchPerformance(userId);
                 setData(userData);
                 setActivity(userActivity || []);
-                // setAvgSessions(userAvgSessions || []);
+                setAvgSessions(userAvgSessions || []);
                 // setPerformance(userPerformance || {});
             } catch (err) {
                 setError(err.message);
@@ -56,7 +57,8 @@ function Dashboard () {
                             Félicitation ! Vous avez explosé vos objectifs hier 👏
                         </div>
                     </div>
-                    <Activities data={activity}/>
+                    <ActivityChart data={activity}/>
+                    <AvgSessionsChart data={avgSessions}/>
                 </div>
             </div>
         </>
