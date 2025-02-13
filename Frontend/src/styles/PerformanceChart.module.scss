@@ -1,0 +1,9 @@
+@import './-variables.scss';
+@import './-mixins.scss';
+
+.performance {
+    width: 30%;
+    height: 320px;
+    background-color: $bg-color;
+    border-radius: 5px;
+}

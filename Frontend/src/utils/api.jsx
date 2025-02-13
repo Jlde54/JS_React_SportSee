@@ -5,11 +5,11 @@ export async function fetchUserData(userId) {
     return fetchData(`${apiUrl}/${userId}`, localUrl, userId);
 }
 
-export async function fetchavgSessions(userId) {
+export async function fetchactivities(userId) {
     return fetchData(`${apiUrl}/${userId}`, localUrl, userId, "activity");
 }
 
-export async function fetchAvgSessions(userId) {
+export async function fetchavgSessions(userId) {
     return fetchData(`${apiUrl}/${userId}`, localUrl, userId, "averageSessions");
 }
 

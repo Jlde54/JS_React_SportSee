@@ -29,12 +29,56 @@
     &__text {
         @include fontStyle(18px,400);
     }
-    &__graphics {
+    &__data {
         @include flexContainer(row, space-between, center);
-        height: 100%;
-        border: solid green 1px;
         width: 100%;
+        height: 100%;
     }
+    &__graphics {
+        @include flexContainer(column, start, center);
+        width: 80%;
+        height: 100%;
+    }
+    &__activityChart {
+        width: 100%;
+        height: 100%;
+    }
+    &__otherCharts {
+        @include flexContainer(row, start, center);
+        width: 100%;
+        height: 100%;
+        padding: 30px;
+        gap: 30px;
+    }
+    &__keydata {
+        @include flexContainer(column, space-between, center);
+        width: 20%;
+        height: 100%;
+    }
+    &__activity {
+        @include flexContainer(row, space-between, center);
+        gap: 15px;
+        width: 100%;
+        @include dimension(140px, 120px);
+        padding: 25px;
+        background-color: $bg-color;
+        border-radius: 5px;
+        &_img {
+            @include dimension(15px, 15px);
+        }
+        &_content {
+            @include flexContainer(column, space-between, start);
+            &_p1 {
+                @include fontStyle(20px, 700);
+                margin: 5px;
+            }
+            &_p2 {
+                @include fontStyle(14px, 500);
+                margin: 0;
+            }
+        }
+    }
+    
 }
 @keyframes fadeIn {
     from {

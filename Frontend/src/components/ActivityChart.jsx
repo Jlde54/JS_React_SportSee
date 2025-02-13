@@ -2,9 +2,9 @@ import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 import styles from '../styles/ActivityChart.module.scss'
 import PropTypes from 'prop-types'
 
-function ActivityChart(avgSessions) {
+function ActivityChart(activities) {
 
-  const datas = avgSessions.data.map((activity, index) => ({
+  const datas = activities.data.map((activity, index) => ({
     day: index + 1,
     kilogram: activity.kilogram,
     calories: activity.calories,
@@ -13,9 +13,9 @@ function ActivityChart(avgSessions) {
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
-        <div className={styles.avgSessions__tooltip}>
+        <div className={styles.activities__tooltip}>
           <p>{`${payload[0].value} kg`}</p>
-          <p className={styles.avgSessions__tooltip_p}>{`${payload[1].value} kcal`}</p>
+          <p className={styles.activities__tooltip_p}>{`${payload[1].value} kcal`}</p>
         </div>
       );
     }
@@ -23,9 +23,12 @@ function ActivityChart(avgSessions) {
   }
 
   return (
-    <div className={styles.avgSessions}>
-      <h3 className={styles.avgSessions__title}>Activité quotidienne</h3>
-      <ResponsiveContainer width="100%" height="100%">
+    <div className={styles.activities}>
+      <h3 className={styles.activities__title}>Activité quotidienne</h3>
+      <ResponsiveContainer 
+        width="100%" 
+        height="100%"
+      >
         <BarChart
           width={702} 
           height={145}
@@ -94,7 +97,6 @@ function ActivityChart(avgSessions) {
             dataKey="kilogram"
             name="Poids (kg)"
             fill="#282D30" 
-            // barSize={7} 
             radius={[3, 3, 0, 0]} 
             // activeBar={<Rectangle fill="rgba(196, 196, 196, 0.5" />} 
           />
@@ -103,7 +105,6 @@ function ActivityChart(avgSessions) {
             dataKey="calories"
             name="Calories brûlées (kCal)"
             fill="#E60000" 
-            // barSize={7} 
             radius={[3, 3, 0, 0]} 
             // activeBar={<Rectangle 
             // fill="rgba(196, 196, 196, 0.5" />} 
@@ -115,7 +116,7 @@ function ActivityChart(avgSessions) {
 }
 
 ActivityChart.propTypes = {
-  avgSessions: PropTypes.string,
+  activities: PropTypes.string,
   active:PropTypes.string,
   payload:PropTypes.string
 }

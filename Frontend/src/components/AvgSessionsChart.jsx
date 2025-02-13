@@ -1,112 +1,99 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Rectangle } from "recharts"
 import styles from '../styles/AvgSessionsChart.module.scss'
 import PropTypes from 'prop-types'
 
 function AvgSessionsChart(avgSessions) {
 
-  const datas = avgSessions.data.map((activity, index) => ({
-    day: index + 1,
-    kilogram: activity.kilogram,
-    calories: activity.calories,
+  const days = ["L", "M", "M", "J", "V", "S", "D"]
+
+  const datas = avgSessions.data.map((session) => ({
+    day: days[session.day - 1],
+    session: session.sessionLength
   }));
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
         <div className={styles.avgSessions__tooltip}>
-          <p>{`${payload[0].value} kg`}</p>
-          <p className={styles.avgSessions__tooltip_p}>{`${payload[1].value} kcal`}</p>
+          <p>{`${payload[0].value} min`}</p>
         </div>
       );
     }
     return null;
   }
 
+  const CustomCursor = (props) => {
+    const { points, width, height, stroke } = props;
+    const { x, y } = points[0];
+    const { x1, y1 } = points[1];
+    console.log(props);
+    return (
+      <Rectangle
+        fill="rgba(0, 0, 0, 0.2)"
+        stroke="rgba(0, 0, 0, 0.2)"
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+      />
+    );
+  };
+
   return (
     <div className={styles.avgSessions}>
-      <h3 className={styles.avgSessions__title}>Activité quotidienne</h3>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer 
+        width="100%" 
+        height="100%"
+        style={{ backgroundColor: "#FF0000", borderRadius: 5 }}
+      >
         <LineChart
-          width={702} 
-          height={145}
+          width={258} 
+          height={263}
           data={datas}
-          margin={{
-            top: 30,
-            right: 0,
-            left: 0,
-            bottom: 30,
-          }}
-          barGap={5}
-          barCategoryGap="5%"
-          barSize={7} 
+          margin={{ top: 50, right: 10, left: 10, bottom: 10 }}
         >
-          <CartesianGrid 
-            strokeDasharray="2 2"
+          <text 
+            x={20} y={20} 
+            fill="#FFFFFF"
+            opacity={0.6}
+            fontSize={15} 
+            fontWeight={500}
+          >
+            Durée moyenne des sessions
+          </text>
+          <CartesianGrid
             vertical={false}
+            horizontal={false}
           />
           <XAxis 
             dataKey="day"
-            tickLine={false}
-            tickMargin={15}
-            tick={{
-              fill: "#9B9EAC",
-              fontSize: 14,
-              fontWeight: 500
-            }}
-            // scale="point"
-            padding={{ left: 10, right: 0 }}
-          />
-          <YAxis
-            orientation="right" 
-            tickCount={3}
             axisLine={false}
             tickLine={false}
-            tickMargin={15}
+            tickMargin={10}
             tick={{
-              fill: "#9B9EAC",
-              fontSize: 14,
-              fontWeight: 500
+              fill: "#FFFFFF",
+              fontSize: 12,
+              fontWeight: 500,
+              opacity: 0.6
             }}
+            padding={{ left: 10, right: 10 }}
           />
+          {/* <YAxis
+            axisLine={false}
+            tickLine={false}
+            tick={false}
+          /> */}
           <Tooltip
             content={<CustomTooltip />}
-          />
-          <Legend 
-            align="right" 
-            verticalAlign="top"
-            layout="horizontal" 
-            iconType="circle"
-            iconSize={8}
-            // itemGap={50}
-            wrapperStyle={{ 
-              top: -30, 
-              right: 10, 
-              color: "#74798C", 
-              fontSize: 14,
-            }}
-            formatter={(value) => (
-              <span style={{ color: "#74798C",verticalAlign: "middle" }}>{value}</span>
-            )}
-
+            cursor={<CustomCursor />}
           />
           <Line
-            layout="vertical"
-            dataKey="kilogram"
-            name="Poids (kg)"
-            fill="#282D30" 
-            // barSize={7} 
-            radius={[3, 3, 0, 0]} 
-            // activeBar={<Rectangle fill="rgba(196, 196, 196, 0.5" />} 
-          />
-          <Line
-            layout="vertical"
-            dataKey="calories"
-            name="Calories brûlées (kCal)"
-            fill="#E60000" 
-            // barSize={7} 
-            radius={[3, 3, 0, 0]} 
-            // activeBar={<Rectangle 
-            // fill="rgba(196, 196, 196, 0.5" />} 
+            type="monotone" 
+            dataKey="session" 
+            stroke="#FFFFFF"
+            dot={false}
+            isAnimationActive={false}
+            domain={[(dataMin) => dataMin - 5, (dataMax) => dataMax + 5]} 
           />
         </LineChart>
       </ResponsiveContainer>
@@ -117,7 +104,11 @@ function AvgSessionsChart(avgSessions) {
 AvgSessionsChart.propTypes = {
   avgSessions: PropTypes.string,
   active:PropTypes.string,
-  payload:PropTypes.string
+  payload:PropTypes.string,
+  points:PropTypes.number, 
+  width:PropTypes.number, 
+  height:PropTypes.number, 
+  stroke:PropTypes.number
 }
 
 export default AvgSessionsChart

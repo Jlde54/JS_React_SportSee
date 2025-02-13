@@ -6,7 +6,7 @@
     background-color: $black-color;
     width: 117px;
     height: calc(100vh - 61px);
-    &__avgSessions {
+    &__activities {
         @include flexContainer(column, space-between, center);
         gap: 20px;
         &_img {
