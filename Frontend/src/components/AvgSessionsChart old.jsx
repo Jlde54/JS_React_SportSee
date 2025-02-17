@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect } from "react";
 import { LineChart, Line, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, Rectangle } from "recharts"
 import styles from '../styles/AvgSessionsChart.module.scss'
 import PropTypes from 'prop-types'
@@ -102,7 +103,7 @@ function AvgSessionsChart(avgSessions) {
 }
 
 AvgSessionsChart.propTypes = {
-  avgSessions: PropTypes.array.isRequired,
+  avgSessions: PropTypes.object,
   active:PropTypes.bool,
   payload:PropTypes.object,
   points:PropTypes.object, 

@@ -2,9 +2,9 @@
 @import './-mixins.scss';
 
 .avgSessions {
-    width: 30%;
-    height: 320px;
-    background-color: $bg-color;
+    width: 33%;
+    aspect-ratio: 1 / 1;
+    background-color: #FF0000;
     border-radius: 5px;
     &__tooltip {
         background-color: $white-color;

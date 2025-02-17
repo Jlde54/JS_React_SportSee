@@ -2,14 +2,14 @@
 @import './-mixins.scss';
 
 .activities {
-    width: 90%;
-    height: 320px;
+    height: 250px;
     background-color: $bg-color;
     border-radius: 5px;
-    padding: 30px;
+    padding: 20px;
     &__title {
         @include fontStyle(15px, 500);
         color: #20253A;
+        margin: 0;
     }
     &__tooltip {
         background-color: $red-color;
@@ -18,6 +18,6 @@
         @include fontStyle(7px, 500);
     }
     &__tooltip_p {
-        margin-top: 20px;
+        margin-top: 10px;
     }
 }

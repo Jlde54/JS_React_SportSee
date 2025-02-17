@@ -3,10 +3,9 @@ import styles from '../styles/PerformanceChart.module.scss'
 import PropTypes from 'prop-types'
 
 function PerformanceChart(performance) {
-  console.log("performance 2 : ", performance)
 
-  const data = performance.data.map((perf) => ({
-    kind: perf.kind,
+  const datas = performance.data.data.map((perf) => ({
+    kind: performance.data.kind[perf.kind],
     value: perf.value
   }));
 
@@ -19,7 +18,7 @@ function PerformanceChart(performance) {
         <RadarChart
           cx="50%" 
           cy="50%"
-          data={data}
+          data={datas}
           outerRadius="70%"
         >
           <PolarGrid
@@ -44,7 +43,7 @@ function PerformanceChart(performance) {
 }
 
 PerformanceChart.propTypes = {
-  performance: PropTypes.array.isRequired
+  performance: PropTypes.object
 }
 
 export default PerformanceChart

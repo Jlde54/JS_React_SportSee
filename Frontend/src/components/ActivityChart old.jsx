@@ -108,7 +108,7 @@ function ActivityChart(activities) {
 }
 
 ActivityChart.propTypes = {
-  activities: PropTypes.array.isRequired,
+  activities: PropTypes.object,
   active:PropTypes.bool,
   payload:PropTypes.object
 }

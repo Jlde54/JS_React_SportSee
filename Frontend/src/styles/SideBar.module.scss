@@ -10,12 +10,11 @@
         @include flexContainer(column, space-between, center);
         gap: 20px;
         &_img {
-            @include dimension(64px, 64px);
+            // @include dimension(64px, 64px);
         }
     }
-    
     &__copyright {
-        @include dimension(138px, 24px);
+        width : 138px;
         color: $white-color;
         rotate: 270deg;
         @include fontStyle(12px,500);
