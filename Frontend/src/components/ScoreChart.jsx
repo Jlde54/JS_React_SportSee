@@ -2,8 +2,21 @@ import { RadialBarChart, RadialBar, ResponsiveContainer, PolarAngleAxis } from "
 import styles from '../styles/ScoreChart.module.scss'
 import PropTypes from 'prop-types'
 
+/**
+ * Composant ScoreChart - Affiche un graphique RadialBarChart représentant le score de l'utilisateur
+ *
+ * @component
+ * @param {Object} score - données de score de l'utilisateur
+ * @param {number} score.data - score
+ * @returns {JSX.Element} - composant ScoreChart rendu
+ */
 function ScoreChart (score) {
 
+  /**
+   * Formate les données du score pour le graphique RadialBarChart
+   * @constant
+   * @type {Array<Object>}
+   */
   const data = [{ name: "Progression", value: Number(score.data * 100) }];
   
   return (
@@ -69,7 +82,7 @@ function ScoreChart (score) {
 };
 
 ScoreChart.propTypes = {
-  score: PropTypes.number
+  score: PropTypes.object
 }
 
 export default ScoreChart;

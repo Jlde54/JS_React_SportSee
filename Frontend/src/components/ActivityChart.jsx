@@ -2,14 +2,35 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import styles from '../styles/ActivityChart.module.scss'
 import PropTypes from 'prop-types'
 
+/**
+ * Composant ActivityChart - Affiche un graphique en barres représentant l'activité quotidienne d'un utilisateur
+ *
+ * @component
+ * @param {Object} activities - données d'activité de l'utilisateur
+ * @param {Array<Object>} activities.data - tableau contenant les données d'activité
+ * @returns {JSX.Element} - composant ActivityChart rendu
+ */
 function ActivityChart(activities) {
-
+  /**
+   * Formate les données d'activité pour le graphique
+   * @constant
+   * @type {Array<Object>}
+   */
   const data = activities.data.map((activity) => ({
     day: activity.day.split("-")[2],
     kilogram: activity.kilogram,
     calories: activity.calories,
   }));
 
+  /**
+   * Composant personnalisé pour l'affichage du tooltip
+   *
+   * @component
+   * @param {Object} props - propriétés du composant
+   * @param {boolean} props.active - indique si l'infobulle est active
+   * @param {Array<Object>} props.payload - contient les valeurs des barres sous la souris
+   * @returns {JSX.Element|null} - contenu de l'infobulle ou null si inactive
+   */
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (

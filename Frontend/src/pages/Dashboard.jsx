@@ -9,6 +9,12 @@ import PerformanceChart from '../components/PerformanceChart.jsx';
 import ScoreChart from '../components/ScoreChart.jsx';
 import SideBar from '../components/SideBar.jsx';
 
+/**
+ * Composant Dashboard - Affiche les données de performance de l'utilisateur, son activité et ses métriques clés
+ *
+ * @component
+ * @returns {JSX.Element} - composant Dashboard rendu
+ */
 function Dashboard () {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
@@ -16,6 +22,10 @@ function Dashboard () {
 
     const {userId} = useParams();
 
+    /**
+     * Liste des métriques utilisateur incluant la clé, l'unité, l'image et le libellé.
+     * @constant {Array<Object>}
+     */
     const um = [
         {"key" : "calorieCount", unit: "kCal", img: "/src/assets/calories-icon.png", text: "Calories"},
         {"key" : "proteinCount", unit: "g", img: "/src/assets/protein-icon.png", text: "Protéines"},
@@ -24,11 +34,16 @@ function Dashboard () {
     ]
 
     useEffect(() => {
+        /**
+         * Récupère les données utilisateur depuis l'API et met à jour le state.
+         * @async
+         * @function fetchData
+         * @returns {Promise<void>} - la promesse ne retourne aucune valeur
+         */
         async function fetchData () {
             try {
                 setLoading(true);
                 const userData = await UserService.getUser(userId);
-                console.log("userData : ", userData)
                 setUser(userData);
             } catch (err) {
                 setError(err.message);
@@ -42,7 +57,6 @@ function Dashboard () {
     if (loading) return <div className={styles.dashboard__loading}>Loading...</div>;
     if (error) return <div>Error : {error}</div>;
     if (!user) return <div>No data available</div>;
-    console.log("user.performance : ", user.performance)
 
     return (
         <>

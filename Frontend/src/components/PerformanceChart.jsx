@@ -2,9 +2,21 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } fro
 import styles from '../styles/PerformanceChart.module.scss'
 import PropTypes from 'prop-types'
 
+/**
+ * Composant PerformanceChart - Affiche un graphique radar représentant la performance de l'utilisateur
+ *
+ * @component
+ * @param {Object} performance - données de performance de l'utilisateur
+ * @param {Array<Object>} performance.data - tableau contenant les valeurs de performance
+ * @returns {JSX.Element} - composant PerformanceChart rendu
+ */
 function PerformanceChart(performance) {
-  console.log("performance 2 : ", performance)
 
+  /**
+   * Formate les données de performance pour le graphique
+   * @constant
+   * @type {Array<Object>}
+   */
   const data = performance.data.map((perf) => ({
     kind: perf.kind,
     value: perf.value

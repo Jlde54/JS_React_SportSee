@@ -2,15 +2,41 @@ import { LineChart, Line, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, Re
 import styles from '../styles/AvgSessionsChart.module.scss'
 import PropTypes from 'prop-types'
 
+/**
+ * Composant AvgSessionsChart - Affiche un graphique en ligne représentant la durée moyenne des sessions
+ *
+ * @component
+ * @param {Object} avgSessions - données des sessions moyennes de l'utilisateur
+ * @param {Array<Object>} avgSessions.data - tableau contenant les données des sessions
+ * @returns {JSX.Element} - composant AvgSessionsChart rendu
+ */
 function AvgSessionsChart(avgSessions) {
-
+  /**
+   * Jours de la semaine abrégés
+   * @constant
+   * @type {Array<string>}
+   */
   const days = ["L", "M", "M", "J", "V", "S", "D"]
 
+  /**
+   * Formate les données des sessions moyennes pour le graphique
+   * @constant
+   * @type {Array<Object>}
+   */
   const data = avgSessions.data.map((session) => ({
     day: days[session.day - 1],
     session: session.sessionLength
   }));
 
+  /**
+   * Composant personnalisé pour l'affichage du tooltip
+   *
+   * @component
+   * @param {Object} props - propriétés du composant
+   * @param {boolean} props.active - indique si le tooltip est actif
+   * @param {Array<Object>} props.payload - contient les valeurs de la session sous la souris.
+   * @returns {JSX.Element|null} - contenu du tooltip ou null si inactif.
+   */
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -22,6 +48,16 @@ function AvgSessionsChart(avgSessions) {
     return null;
   }
 
+  /**
+   * Composant personnalisé pour l'affichage du curseur
+   *
+   * @component
+   * @param {Object} props - propriétés du curseur
+   * @param {Array<Object>} props.points - points du graphique sous la souris
+   * @param {number} props.width - largeur du curseur
+   * @param {number} props.height - hauteur du curseur
+   * @returns {JSX.Element} - curseur personnalisé
+   */
   const CustomCursor = (props) => {
     const { points, width, height } = props;
     const { x } = points[0];
