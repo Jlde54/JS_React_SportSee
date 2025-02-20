@@ -18,7 +18,7 @@ function Home () {
             {/* Liens de navigation vers les utilisateurs */}
             <nav className={styles.home__nav}>
                 <Link className={styles.home__link} to={'/user/12'}>Karl Dovineau</Link>
-                <Link className={styles.link} to={'/user/18'}>Cecilia Ratorez</Link>
+                <Link className={styles.home__link} to={'/user/18'}>Cecilia Ratorez</Link>
             </nav>
         </div>
     )

@@ -4,86 +4,82 @@ const apiUrl = "http://localhost:3000/user/";
 const localUrl = "../../mockedData/data.json";
 
 /**
- * Classe UserService - Récupération des données utilisateur depuis l'API ou les données mockées
+ * Récupère toutes les données utilisateur (infos, activité, sessions moyennes, performances).
+ * Si l'API échoue, bascule automatiquement vers les données locales.
+ * 
+ * @param {string} userId - ID de l'utilisateur.
+ * @returns {Promise<User>} - Instance complète de l'utilisateur.
+ * @throws {Error} - Si les données ne peuvent pas être récupérées.
  */
-export class UserService {
-    /**
-     * Récupère les données utilisateur depuis l'API ou les données mockées
-     * 
-     * @param {string} userId - ID de l'utilisateur
-     * @returns {Promise<User>} - promesse résolvant une instance de User
-     * @throws {Error} - Si les données utilisateur ne peuvent pas être récupérées
-     */
-    static async getUser(userId) {
-        try {
-            // Récupération des différentes parties des données utilisateur
-            const userInfo = await this.fetchData(`${apiUrl}${userId}`, localUrl, userId);
-            const userActivity = await this.fetchData(`${apiUrl}${userId}/activity`, localUrl, userId, "activity");
-            const userSessions = await this.fetchData(`${apiUrl}${userId}/average-sessions`, localUrl, userId, "averageSessions");
-            const userPerformance = await this.fetchData(`${apiUrl}${userId}/performance`, localUrl, userId, "performance");
+export async function getUser(userId) {
+    try {
 
-            if (!userInfo || !userInfo.data) {
-                throw new Error(`Données utilisateur ${userId} introuvables.`);
-            }
+        // Récupération séquentielle des données depuis l'API
+        const userInfo = await fetchData(`${apiUrl}${userId}`);
+        const userActivity = await fetchData(`${apiUrl}${userId}/activity`);
+        const userSessions = await fetchData(`${apiUrl}${userId}/average-sessions`);
+        const userPerformance = await fetchData(`${apiUrl}${userId}/performance`);
 
-            // Fusion de toutes les données en un seul objet
-            const completeUserData = {
-                ...userInfo.data,
-                activity: userActivity?.data?.sessions || [],
-                averageSessions: userSessions?.data?.sessions || [],
-                performance: userPerformance?.data || { data: [], kind: {} }
-            };
-
-            return new User(completeUserData);
-        } catch (error) {
-            console.error(`Erreur lors de la récupération de l'utilisateur ${userId}:`, error.message);
-            throw error;
-        }
+        return mergeUserData(userInfo, userActivity, userSessions, userPerformance);
+    } catch (error) {
+        // Fallback unique vers les données locales
+        console.warn(`API non accessible, basculement vers les données mockées...`, error.message);
+        return await fetchLocalUser(userId);
     }
-     /**
-     * Récupère les données utilisateur depuis l'API ou utilise les données mockées si l'API est inaccessible
-     * 
-     * @param {string} apiUrl - URL de l'endpoint API
-     * @param {string} localUrl - chemin des données mockées
-     * @param {string} userId - ID de l'utilisateur à récupérer
-     * @param {string} [dataType="user"] - type de données à récupérer (ex: "user", "activity", "averageSessions", "performance")
-     * @returns {Promise<Object>} - promesse résolvant les données utilisateur demandées
-     * @throws {Error} - Si ni l'API ni les données mockées ne sont accessibles
-     */
-    static async fetchData(apiUrl, localUrl, userId, dataType = "user") {
-        try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) throw new Error(`Erreur API : ${response.status}`);
-            const apiData = await response.json();
-            return apiData;
-        } catch (error) {
-            console.warn(`API non accessible pour ${dataType}, basculement vers les données mockées...`, error.message);
-            try {
-                const localResponse = await fetch(localUrl);
-                if (!localResponse.ok) throw new Error(`Erreur locale : ${localResponse.status}`);
-                const mockedData = await localResponse.json();
+}
 
-                const user = mockedData.users.find(user => Number(user.id) === Number(userId));
+/**
+ * Effectue une requête fetch vers une URL donnée.
+ * 
+ * @param {string} url - URL à interroger.
+ * @returns {Promise<Object>} - Données retournées par l'API.
+ * @throws {Error} - Si la requête échoue.
+ */
+async function fetchData(url) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Erreur API : ${response.status}`);
+    return await response.json();
+}
 
-                if (!user) {
-                    throw new Error(`Utilisateur ${userId} introuvable dans le mock.`);
-                }
+/**
+ * Récupère toutes les données utilisateur à partir des données mockées en un seul appel.
+ * 
+ * @param {string} userId - ID de l'utilisateur.
+ * @returns {Promise<User>} - Instance complète de l'utilisateur.
+ * @throws {Error} - Si l'utilisateur n'est pas trouvé.
+ */
+async function fetchLocalUser(userId) {
+    const response = await fetch(localUrl);
+    if (!response.ok) throw new Error(`Erreur locale : ${response.status}`);
+    const mockedData = await response.json();
 
-                switch (dataType) {
-                    case "activity":
-                        return { data: { sessions: user.activity || [] } };
-                    case "averageSessions":
-                        return { data: { sessions: user.averageSessions || [] } };
-                    case "performance":
-                        return { data: user.performance || { data: [], kind: {} } };
-                    default:
-                        return { data: user };
-                }
+    const user = mockedData.users.find(user => Number(user.id) === Number(userId));
+    if (!user) throw new Error(`Utilisateur ${userId} introuvable dans le mock.`);
 
-            } catch (jsonError) {
-                console.error(`Échec du chargement des données locales pour ${dataType}: `, jsonError.message);
-                throw new Error("Impossible de récupérer les données.");
-            }
-        }
-    }
+    return mergeUserData(
+        { data: user },
+        { data: { sessions: user.activity || [] } },
+        { data: { sessions: user.averageSessions || [] } },
+        { data: user.performance || { data: [], kind: {} } }
+    );
+}
+
+/**
+ * Assemble toutes les données de l'utilisateur dans une instance unique.
+ * 
+ * @param {Object} userInfo - Informations principales de l'utilisateur.
+ * @param {Object} userActivity - Données d'activité quotidienne.
+ * @param {Object} userSessions - Données des sessions moyennes.
+ * @param {Object} userPerformance - Données de performance.
+ * @returns {User} - Instance complète de l'utilisateur.
+ */
+function mergeUserData(userInfo, userActivity, userSessions, userPerformance) {
+    const completeUserData = {
+        ...userInfo.data,
+        activity: userActivity?.data?.sessions || [],
+        averageSessions: userSessions?.data?.sessions || [],
+        performance: userPerformance?.data || { data: [], kind: {} }
+    };
+
+    return new User(completeUserData);
 }

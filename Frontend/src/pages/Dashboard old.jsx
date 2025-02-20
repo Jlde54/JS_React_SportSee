@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getUser } from '../services/UserService';
+import { UserService } from '../services/UserService.jsx';
 import styles from '../styles/Dashboard.module.scss';
 import Header from '../components/Header.jsx';
 import ActivityChart from '../components/ActivityChart.jsx';
@@ -43,7 +43,7 @@ function Dashboard () {
         async function fetchData () {
             try {
                 setLoading(true);
-                const userData = await getUser(userId);
+                const userData = await UserService.getUser(userId);
                 setUser(userData);
             } catch (err) {
                 setError(err.message);
