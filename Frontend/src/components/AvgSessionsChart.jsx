@@ -138,7 +138,7 @@ function AvgSessionsChart(avgSessions) {
 }
 
 AvgSessionsChart.propTypes = {
-  avgSessions: PropTypes.array.isRequired,
+  avgSessions: PropTypes.array,
   active:PropTypes.bool,
   payload:PropTypes.object,
   points:PropTypes.object, 
