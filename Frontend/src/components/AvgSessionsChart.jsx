@@ -49,14 +49,14 @@ function AvgSessionsChart(avgSessions) {
   }
 
   /**
-   * Composant personnalisé pour l'affichage du curseur
+   * Composant personnalisé pour l'affichage du rectangle semi-transparent
    *
    * @component
    * @param {Object} props - propriétés du curseur
-   * @param {Array<Object>} props.points - points du graphique sous la souris
-   * @param {number} props.width - largeur du curseur
-   * @param {number} props.height - hauteur du curseur
-   * @returns {JSX.Element} - curseur personnalisé
+   * @param {Array<Object>} props.points - coordonnées du graphique survolées par la souris
+   * @param {number} props.width - largeur du rectangle à tracer
+   * @param {number} props.height - hauteur du rectangle à tracer
+   * @returns {JSX.Element} - rectangle à tracer
    */
   const CustomCursor = (props) => {
     const { points, width, height } = props;

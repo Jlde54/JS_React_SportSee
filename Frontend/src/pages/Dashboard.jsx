@@ -8,6 +8,7 @@ import AvgSessionsChart from '../components/AvgSessionsChart.jsx';
 import PerformanceChart from '../components/PerformanceChart.jsx';
 import ScoreChart from '../components/ScoreChart.jsx';
 import SideBar from '../components/SideBar.jsx';
+import KeyData from '../components/KeyData.jsx';
 
 /**
  * Composant Dashboard - Affiche les données de performance de l'utilisateur, son activité et ses métriques clés
@@ -84,15 +85,7 @@ function Dashboard () {
                             </div>
                         </div>
                         <div className={styles.dashboard__keydata}>
-                            {um.map((item) => (
-                                <div key={item.key} className={styles.dashboard__activity}>
-                                    <img className={styles.dashboard__activity_img} src={item.img} alt={`Logo ${item.text}`} />
-                                    <div className={styles.dashboard__activity_content}>
-                                        <p className={styles.dashboard__activity_content_p1}>{user.keyData[item.key]}{item.unit}</p>
-                                        <p className={styles.dashboard__activity_content_p2}>{item.text}</p>
-                                    </div>
-                                </div>
-                            ))}
+                            <KeyData um={um} user={user} />
                         </div>
                     </div>
                 </div>
