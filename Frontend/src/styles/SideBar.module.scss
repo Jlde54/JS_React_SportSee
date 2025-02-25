@@ -9,9 +9,6 @@
     &__activities {
         @include flexContainer(column, space-between, center);
         gap: 20px;
-        &_img {
-            // @include dimension(64px, 64px);
-        }
     }
     &__copyright {
         width : 138px;

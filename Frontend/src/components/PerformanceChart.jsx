@@ -3,17 +3,17 @@ import styles from '../styles/PerformanceChart.module.scss'
 import PropTypes from 'prop-types'
 
 /**
- * Composant PerformanceChart - Affiche un graphique radar représentant la performance de l'utilisateur
+ * PerformanceChart Component - Displays a radar chart representing the user's performance
  *
  * @component
- * @param {Object} performance - données de performance de l'utilisateur
- * @param {Array<Object>} performance.data - tableau contenant les valeurs de performance
- * @returns {JSX.Element} - composant PerformanceChart rendu
+ * @param {Object} performance - user's performance data
+ * @param {Array<Object>} performance.data - array containing performance values
+ * @returns {JSX.Element} - rendered PerformanceChart component
  */
 function PerformanceChart(performance) {
 
   /**
-   * Formate les données de performance pour le graphique
+   * Formats the performance data for the chart
    * @constant
    * @type {Array<Object>}
    */

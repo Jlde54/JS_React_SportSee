@@ -5,34 +5,34 @@ import cycling from '../assets/cycling_red_on_white.png'
 import weight from '../assets/weight_red_on_white.png'
 
 /**
- * Composant SideBar - Affiche une barre latérale avec des icônes d'activités et un message de copyright
+ * SideBar Component - Displays a sidebar with activity icons and a copyright message
  *
  * @component
- * @returns {JSX.Element} - composant SideBar rendu
+ * @returns {JSX.Element} - rendered SideBar component
  */
 function SideBar() {
 
     return (
         <aside className={styles.SideBar}>
             <div className={styles.SideBar__activities}>
-                {/* Icône de Yoga */}
+                {/* Yoga icon */}
                 <a href="#">
                     <img className={styles.SideBar__activities_img} src={yoga} alt="Logo Yoga" />
                 </a>
-                {/* Icône de Natation */}
+                {/* Swimming icon */}
                 <a href="#">
                     <img className={styles.SideBar__activities_img} src={swimming} alt="Logo swimming" />
                 </a>
-                {/* Icône de Cyclisme */}
+                {/* Cycling icon */}
                 <a href="#">
                     <img className={styles.SideBar__activities_img} src={cycling} alt="Logo cycling" />
                 </a>
-                {/* Icône de Musculation */}
+                {/* Weightlifting icon */}
                 <a href="#">
                     <img className={styles.SideBar__activities_img} src={weight} alt="Logo weight" />
                 </a>
             </div>
-            {/* Texte de copyright */}
+            {/* Copyright text */}
             <p className={styles.SideBar__copyright}>
                 Copyright SportSee 2025
             </p>

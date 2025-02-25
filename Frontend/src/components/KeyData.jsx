@@ -2,12 +2,12 @@ import styles from '../styles/KeyData.module.scss'
 import PropTypes from 'prop-types'
 
 /**
- * Composant KeyData - Affiche les métriques clés représentant les calories, protéines, glucides, lipides consommés par l'utilisateur
+ * KeyData Component - Displays key metrics representing the calories, proteins, carbohydrates, and lipids consumed by the user
  *
  * @component
- * @param {Array<Object>} um - tableau contenant les métrics clés
- * @param {Object} user - données l'utilisateur
- * @returns {JSX.Element} - composant KeyData rendu
+ * @param {Array<Object>} um - array containing the key metrics
+ * @param {Object} user - user's data
+ * @returns {JSX.Element} - rendered KeyData component
  */
 function KeyData({um, user}) {
   return (

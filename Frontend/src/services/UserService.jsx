@@ -4,17 +4,16 @@ const apiUrl = "http://localhost:3000/user/";
 const localUrl = "../../mockedData/data.json";
 
 /**
- * Récupère toutes les données utilisateur (infos, activité, sessions moyennes, performances).
- * Si l'API échoue, bascule automatiquement vers les données locales.
+ * Retrieves all user data (info, activity, average sessions, performance).
+ * If the API fails, automatically switches to local data..
  * 
- * @param {string} userId - ID de l'utilisateur.
- * @returns {Promise<User>} - Instance complète de l'utilisateur.
- * @throws {Error} - Si les données ne peuvent pas être récupérées.
+ * @param {string} userId - User ID.
+ * @returns {Promise<User>} - Complete user instance.
+ * @throws {Error} - If the data cannot be retrieved.
  */
 export async function getUser(userId) {
     try {
-
-        // Récupération séquentielle des données depuis l'API
+        // Fetch user data from the API
         const userInfo = await fetchData(`${apiUrl}${userId}`);
         const userActivity = await fetchData(`${apiUrl}${userId}/activity`);
         const userSessions = await fetchData(`${apiUrl}${userId}/average-sessions`);
@@ -22,18 +21,18 @@ export async function getUser(userId) {
 
         return mergeUserData(userInfo, userActivity, userSessions, userPerformance);
     } catch (error) {
-        // Fallback unique vers les données locales
+         // If the API is not accessible, display a warning and use local mock data instead
         console.warn(`API non accessible, basculement vers les données mockées...`, error.message);
         return await fetchLocalUser(userId);
     }
 }
 
 /**
- * Effectue une requête fetch vers une URL donnée.
+ * Performs a fetch request to a given URL.
  * 
- * @param {string} url - URL à interroger.
- * @returns {Promise<Object>} - Données retournées par l'API.
- * @throws {Error} - Si la requête échoue.
+ * @param {string} url - URL to query.
+ * @returns {Promise<Object>} - Data returned by the API.
+ * @throws {Error} - If the request fails.
  */
 async function fetchData(url) {
     const response = await fetch(url);
@@ -42,11 +41,11 @@ async function fetchData(url) {
 }
 
 /**
- * Récupère toutes les données utilisateur à partir des données mockées en un seul appel.
+ * Retrieves all user data from mocked data in a single call.
  * 
- * @param {string} userId - ID de l'utilisateur.
- * @returns {Promise<User>} - Instance complète de l'utilisateur.
- * @throws {Error} - Si l'utilisateur n'est pas trouvé.
+ * @param {string} userId - User ID.
+ * @returns {Promise<User>} - Complete user instance.
+ * @throws {Error} - If the user is not found.
  */
 async function fetchLocalUser(userId) {
     const response = await fetch(localUrl);
@@ -65,13 +64,13 @@ async function fetchLocalUser(userId) {
 }
 
 /**
- * Assemble toutes les données de l'utilisateur dans une instance unique.
+ * Merges all user data into a single user instance.
  * 
- * @param {Object} userInfo - Informations principales de l'utilisateur.
- * @param {Object} userActivity - Données d'activité quotidienne.
- * @param {Object} userSessions - Données des sessions moyennes.
- * @param {Object} userPerformance - Données de performance.
- * @returns {User} - Instance complète de l'utilisateur.
+ * @param {Object} userInfo - Main user information.
+ * @param {Object} userActivity - Daily activity data.
+ * @param {Object} userSessions - Average session data.
+ * @param {Object} userPerformance - Performance data.
+ * @returns {User} - Complete user instance.
  */
 function mergeUserData(userInfo, userActivity, userSessions, userPerformance) {
     const completeUserData = {

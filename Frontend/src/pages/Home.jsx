@@ -3,19 +3,19 @@ import styles from '../styles/Home.module.scss'
 import logoRed from '../assets/Logo_red.png'
 
 /**
- * Composant Home - Affiche la page d'accueil avec des options de sélection d'utilisateur
+ * Home Component - Displays the homepage with user selection options
  *
  * @component
- * @returns {JSX.Element} - composant Home rendu
+ * @returns {JSX.Element} - rendered Home component
  */
 function Home () {
     return (
         <div className={styles.home}>
-            {/* Image du logo */}
+            {/* Logo image */}
             <img className={styles.home__logoImg} src={logoRed} alt="Logo SportSee" />
-            {/* Titre */}
+            {/* Title  */}
             <p className={styles.home__title}>Choisissez un utilisateur :</p>
-            {/* Liens de navigation vers les utilisateurs */}
+            {/* Navigation links to user profiles */}
             <nav className={styles.home__nav}>
                 <Link className={styles.home__link} to={'/user/12'}>Karl Dovineau</Link>
                 <Link className={styles.home__link} to={'/user/18'}>Cecilia Ratorez</Link>

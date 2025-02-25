@@ -3,16 +3,16 @@ import styles from '../styles/ActivityChart.module.scss'
 import PropTypes from 'prop-types'
 
 /**
- * Composant ActivityChart - Affiche un graphique en barres représentant l'activité quotidienne d'un utilisateur
+ * ActivityChart Component - Displays a bar chart representing a user's daily activity
  *
  * @component
- * @param {Object} activities - données d'activité de l'utilisateur
- * @param {Array<Object>} activities.data - tableau contenant les données d'activité
- * @returns {JSX.Element} - composant ActivityChart rendu
+ * @param {Object} activities - user's activity data
+ * @param {Array<Object>} activities.data - activities.data - array containing activity data
+ * @returns {JSX.Element} - rendered ActivityChart component
  */
 function ActivityChart(activities) {
   /**
-   * Formate les données d'activité pour le graphique
+   * Formats the activity data for the chart
    * @constant
    * @type {Array<Object>}
    */
@@ -23,13 +23,13 @@ function ActivityChart(activities) {
   }));
 
   /**
-   * Composant personnalisé pour l'affichage du tooltip
+   * Component for displaying the tooltip
    *
    * @component
-   * @param {Object} props - propriétés du composant
-   * @param {boolean} props.active - indique si l'infobulle est active
-   * @param {Array<Object>} props.payload - contient les valeurs des barres sous la souris
-   * @returns {JSX.Element|null} - contenu de l'infobulle ou null si inactive
+   * @param {Object} props - component properties
+   * @param {boolean} props.active - indicates if the tooltip is active
+   * @param {Array<Object>} props.payload - contains the values of the bars under the cursor
+   * @returns {JSX.Element|null} - tooltip content or null if inactive
    */
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {

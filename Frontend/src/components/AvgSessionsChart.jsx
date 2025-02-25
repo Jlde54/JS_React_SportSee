@@ -3,23 +3,23 @@ import styles from '../styles/AvgSessionsChart.module.scss'
 import PropTypes from 'prop-types'
 
 /**
- * Composant AvgSessionsChart - Affiche un graphique en ligne représentant la durée moyenne des sessions
+ * AvgSessionsChart Component - Displays a line chart representing the average session duration
  *
  * @component
- * @param {Object} avgSessions - données des sessions moyennes de l'utilisateur
- * @param {Array<Object>} avgSessions.data - tableau contenant les données des sessions
- * @returns {JSX.Element} - composant AvgSessionsChart rendu
+ * @param {Object} avgSessions - user's average session data
+ * @param {Array<Object>} avgSessions.data - array containing session data
+ * @returns {JSX.Element} - rendered AvgSessionsChart component
  */
 function AvgSessionsChart(avgSessions) {
   /**
-   * Jours de la semaine abrégés
+   * Abbreviated days of the week
    * @constant
    * @type {Array<string>}
    */
   const days = ["L", "M", "M", "J", "V", "S", "D"]
 
   /**
-   * Formate les données des sessions moyennes pour le graphique
+   * Formats the average session data for the chart
    * @constant
    * @type {Array<Object>}
    */
@@ -29,7 +29,7 @@ function AvgSessionsChart(avgSessions) {
   }));
 
   /**
-   * Composant personnalisé pour l'affichage du tooltip
+   * Component for displaying the tooltip
    *
    * @component
    * @param {Object} props - propriétés du composant
@@ -49,14 +49,14 @@ function AvgSessionsChart(avgSessions) {
   }
 
   /**
-   * Composant personnalisé pour l'affichage du rectangle semi-transparent
+   * Component for displaying the semi-transparent rectangle
    *
    * @component
-   * @param {Object} props - propriétés du curseur
-   * @param {Array<Object>} props.points - coordonnées du graphique survolées par la souris
-   * @param {number} props.width - largeur du rectangle à tracer
-   * @param {number} props.height - hauteur du rectangle à tracer
-   * @returns {JSX.Element} - rectangle à tracer
+   * @param {Object} props - cursor properties
+   * @param {Array<Object>} props.points - chart coordinates hovered by the mouse
+   * @param {number} props.width - width of the rectangle to draw
+   * @param {number} props.height - height of the rectangle to draw
+   * @returns {JSX.Element} - rectangle to be drawn
    */
   const CustomCursor = (props) => {
     const { points, width, height } = props;

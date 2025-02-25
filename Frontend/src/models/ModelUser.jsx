@@ -1,26 +1,26 @@
 /**
- * Classe représentant un utilisateur
+ * Class representing a user
  */
 export class User {
     /**
-     * Instance de User.
-     * @param {Object} data - données de l'utilisateur
+     * Instance of User..
+     * @param {Object} data - user's data
      */
     constructor(data) {
         /**
-         * @property {number} id - identifiant
+         * @property {number} id - identifier
          */
         this.id = data.id;
         /**
-         * @property {string} firstName - prénom
+         * @property {string} firstName - first name
          */
         this.firstName = data.userInfos?.firstName || "Inconnu";
         /**
-         * @property {string} lastName - nom de famille
+         * @property {string} lastName - last name
          */
         this.lastName = data.userInfos?.lastName || "Inconnu";
         /**
-         * @property {number} age - âge
+         * @property {number} age - age
          */
         this.age = data.userInfos?.age || 0;
         /**
@@ -28,27 +28,27 @@ export class User {
          */
         this.score = data.todayScore ?? data.score ?? 0;
         /**
-         * @property {Object} keyData - données clés (calories, protéines, glucides, lipides)
+         * @property {Object} keyData - key data (calories, proteins, carbohydrates, lipids)
          */
         this.keyData = this.formatKeyData(data.keyData);
         /**
-         * @property {Array<Object>} activity - historique d'activité
+         * @property {Array<Object>} activity - activity history
          */
         this.activity = this.formatActivity(data.activity);
         /**
-         * @property {Array<Object>} averageSessions - durée moyenne des sessions
+         * @property {Array<Object>} averageSessions - average session duration
          */
         this.averageSessions = this.formatAverageSessions(data.averageSessions);
         /**
-         * @property {Array<Object>} performance - indicateurs de performance
+         * @property {Array<Object>} performance - performance indicators
          */
         this.performance = this.formatPerformance(data.performance);
     }
 
     /**
-     * Formate les données clés de l'utilisateur
-     * @param {Object} keyData - données clés brutes
-     * @returns {Object} - données clés formatées
+     * Formats the user's key data
+     * @param {Object} keyData - raw key data
+     * @returns {Object} - formatted key data
      */
     formatKeyData(keyData) {
         return keyData
@@ -62,9 +62,9 @@ export class User {
     }
 
     /**
-     * Formate les données d'activité de l'utilisateur
-     * @param {Array<Object>} activity - données brutes d'activité
-     * @returns {Array<Object>} - données d'activité formatées
+     * Formats the user's activity data
+     * @param {Array<Object>} activity - raw activity data
+     * @returns {Array<Object>} - formatted activity data
      */
     formatActivity(activity) {
         return Array.isArray(activity)
@@ -77,9 +77,9 @@ export class User {
     }
 
     /**
-     * Formate les sessions moyennes de l'utilisateur
-     * @param {Array<Object>} averageSessions - données brutes des sessions moyennes
-     * @returns {Array<Object>} - sessions moyennes formatées
+     * Formats the user's average sessions
+     * @param {Array<Object>} averageSessions - raw average session data
+     * @returns {Array<Object>} - formatted average sessions
      */
     formatAverageSessions(averageSessions) {
         return Array.isArray(averageSessions)
@@ -91,9 +91,9 @@ export class User {
     }
 
     /**
-     * Formate les données de performance de l'utilisateur
-     * @param {Object} performance - données brutes de performance
-     * @returns {Array<Object>} - données de performance formatées
+     * Formats the user's performance data
+     * @param {Object} performance - raw performance data
+     * @returns {Array<Object>} - formatted performance data
      */
     formatPerformance(performance) {
         return performance?.data

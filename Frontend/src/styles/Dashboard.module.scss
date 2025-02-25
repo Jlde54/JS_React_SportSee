@@ -53,28 +53,6 @@
         width: 25%;
         height: 100%;
     }
-    // &__activity {
-    //     @include flexContainer(row, space-between, center);
-    //     gap: 15px;
-    //     padding: 25px;
-    //     background-color: $bg-color;
-    //     border-radius: 5px;
-    //     &_img {
-    //         @include dimension(60px, 60px);
-    //     }
-    //     &_content {
-    //         @include flexContainer(column, space-between, start);
-    //         min-width: 87px;
-    //         &_p1 {
-    //             @include fontStyle(20px, 700);
-    //             margin-block: 5px;
-    //         }
-    //         &_p2 {
-    //             @include fontStyle(14px, 500);
-    //             margin: 0;
-    //         }
-    //     }
-    // }
 }
 @keyframes fadeIn {
     from {

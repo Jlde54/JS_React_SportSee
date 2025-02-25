@@ -4,21 +4,21 @@ import logoRed from '../assets/Logo_red.png'
 import sportSee from '../assets/SportSee_red.png'
 
 /**
- * Composant Header - Affiche l'en-tête du site avec le logo et la navigation principale
+ * Header Component - Displays the website header with the logo and main navigation
  *
  * @component
- * @returns {JSX.Element} - composant Header rendu
+ * @returns {JSX.Element} - rendered Header component
  */
 function Header() {
 
     return (
         <header className={styles.header}>
             <div className={styles.header__logo}>
-                {/* Logo de l'application */}
+                {/* Application logo */}
                 <img className={styles.header__logoImg} src={logoRed} alt="Logo SportSee" />
                 <img className={styles.header__logoName} src={sportSee} alt="SportSee name" />
             </div>
-            {/* Navigation principale */}
+            {/* Main navigation */}
             <nav className={styles.header__nav}>
                 <ul className={styles.header__ul}>
                     <li className={styles.header__li}><Link className={styles.header__li} to={'/'}>Accueil</Link></li>

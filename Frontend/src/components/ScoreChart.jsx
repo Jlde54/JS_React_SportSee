@@ -3,17 +3,17 @@ import styles from '../styles/ScoreChart.module.scss'
 import PropTypes from 'prop-types'
 
 /**
- * Composant ScoreChart - Affiche un graphique RadialBarChart représentant le score de l'utilisateur
+ * ScoreChart Component - Displays a RadialBarChart representing the user's score
  *
  * @component
- * @param {Object} score - données de score de l'utilisateur
+ * @param {Object} score - user's score data
  * @param {number} score.data - score
- * @returns {JSX.Element} - composant ScoreChart rendu
+ * @returns {JSX.Element} - rendered ScoreChart component
  */
 function ScoreChart (score) {
 
   /**
-   * Formate les données du score pour le graphique RadialBarChart
+   * Formats the score data for the RadialBarChart
    * @constant
    * @type {Array<Object>}
    */

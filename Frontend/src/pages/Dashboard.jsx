@@ -11,10 +11,10 @@ import SideBar from '../components/SideBar.jsx';
 import KeyData from '../components/KeyData.jsx';
 
 /**
- * Composant Dashboard - Affiche les données de performance de l'utilisateur, son activité et ses métriques clés
+ * Dashboard Component - Displays the user's performance data, activity, and key metrics
  *
  * @component
- * @returns {JSX.Element} - composant Dashboard rendu
+ * @returns {JSX.Element} - rendered Dashboard component
  */
 function Dashboard () {
     const [user, setUser] = useState(null);
@@ -24,7 +24,7 @@ function Dashboard () {
     const {userId} = useParams();
 
     /**
-     * Liste des métriques utilisateur incluant la clé, l'unité, l'image et le libellé.
+     * List of user metrics including the key, unit, image, and label.
      * @constant {Array<Object>}
      */
     const um = [
@@ -36,10 +36,10 @@ function Dashboard () {
 
     useEffect(() => {
         /**
-         * Récupère les données utilisateur depuis l'API et met à jour le state.
+         * Fetches user data from the API and updates the state.
          * @async
          * @function fetchData
-         * @returns {Promise<void>} - la promesse ne retourne aucune valeur
+         * @returns {Promise<void>} - the promise returns no value
          */
         async function fetchData () {
             try {
